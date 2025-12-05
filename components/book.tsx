@@ -83,6 +83,13 @@ export default function BookReader({
   };
 
   const currentImg = images[currentIndex] ?? null;
+   const [isBrowser, setIsBrowser] = useState(false);
+
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
+  if (!isBrowser) return null;
 
   return (
     <div className="w-full min-h-[80vh] flex flex-col items-center justify-start py-12 bg-gradient-to-b from-[#fdf8f0] to-[#fff9f0] relative">
