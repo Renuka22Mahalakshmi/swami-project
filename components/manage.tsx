@@ -24,13 +24,17 @@ export default function ManagementPage() {
   };
 
   const rowAnim = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: "easeOut" },
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0, 0, 0.58, 1], // easeOut
     },
-  };
+  },
+};
+
 
   const textAnim = {
     hidden: { opacity: 0, x: -10 },
