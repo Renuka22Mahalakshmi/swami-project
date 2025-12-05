@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 
 const Manage = dynamic(() => import("../components/manage"), { ssr: false });
 
+
 const teamMembers = [
   { name: "D Ramchandra Reddy", role: "President", image: "/28.png" },
   { name: "D Rama Lakshmi", role: "Vice President", image: "/28.png" },

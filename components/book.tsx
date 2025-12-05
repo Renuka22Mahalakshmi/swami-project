@@ -18,6 +18,11 @@ export default function BookReader({
   initialPage = 0,
   pageWidth = 1200,
 }: Props) {
+  useEffect(() => {
+    // This code runs only in the browser
+    const matrix = new DOMMatrix();
+    console.log(matrix);
+  }, []);
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState<number>(initialPage);
