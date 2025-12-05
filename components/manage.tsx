@@ -30,10 +30,11 @@ export default function ManagementPage() {
     y: 0,
     transition: {
       duration: 0.4,
-      ease: [0, 0, 0.58, 1], // easeOut
+      ease: (t: any) => t,     // <--- IMPORTANT
     },
   },
 };
+
 
 
   const textAnim = {
