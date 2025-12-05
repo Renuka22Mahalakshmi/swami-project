@@ -29,7 +29,7 @@ const navLinks = [
   { label: "Videos", href: "/videos" },
   { label: "Products", href: "/product" },
   { label: "Contact", href: "/contact" },
-  { label: "Management", href: "/management" },
+  { label: "Management", href: "/manage" },
 ];
 
 export default function Navigation() {
