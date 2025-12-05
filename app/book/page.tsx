@@ -1,7 +1,6 @@
 "use client";
 import BookReader from "@/components/book"
 
-
 const Page = () => {
   return (
     <div>

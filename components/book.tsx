@@ -3,6 +3,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as pdfjsLib from "pdfjs-dist";
 import "pdfjs-dist/webpack";
+import dynamic from "next/dynamic";
+
+const Manage = dynamic(() => import("../components/manage"), { ssr: false });
 
 type Props = {
   pdfUrl?: string;
