@@ -1,68 +1,59 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import heroBg from "../public/heaven.jpg";
 
-export default function Header() {
-  // 👉 Add your URL here later (local or hosted)
-  const headerBg = "/cover.png"; // you can change this anytime
-
+export const HeroSection = () => {
   return (
-    <header className="relative w-full overflow-hidden">
-      <motion.div
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        className="relative w-full h-[600px]"
-      >
-        {/* Background Image */}
-        <motion.div
-          initial={{ filter: "brightness(0.7)" }}
-          animate={{ filter: "brightness(1)" }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={headerBg}
-            alt="Header background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </motion.div>
-
-        {/* Radial glow */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(255,165,0,0.3) 0%, transparent 70%)",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0.7] }}
-          transition={{ duration: 2, ease: "easeInOut" }}
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+    >
+      {/* Centered Image */}
+      <div className="absolute inset-0">
+        <Image
+          src={heroBg}
+          alt="Sacred temple"
+          fill
+          className="object-cover"  // ensure original proportions
+          priority
         />
+      </div>
 
-        {/* Pulsing center light */}
-        <motion.div
-          className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(255,200,100,0.4) 0%, transparent 70%)",
-            transform: "translate(-50%, -50%)",
-            filter: "blur(40px)",
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </motion.div>
-    </header>
+      {/* Optional Overlays (you can remove if not needed) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/20 to-background pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 pointer-events-none" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto text-center px-4 pt-104">
+        <div className="flex justify-center mb-8">
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
+        </div>
+
+       <p className="font-serif text-lg md:text-xl text-[#f54202] mb-6">
+  ॐ श्री सद्गुरु देव की जय
+</p>
+
+<h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white drop-shadow-md mb-6">
+  Avadhutha Sri
+  <span className="block mt-2 bg-gradient-to-r from-[#f54202] to-white bg-clip-text text-transparent">
+    Rami Reddy Thata
+  </span>
+  <span className="block mt-4 text-3xl sm:text-4xl md:text-5xl font-normal text-white/90">
+    Samsthan
+  </span>
+</h1>
+
+<div className="flex justify-center mb-8">
+  <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#f54202] to-transparent" />
+</div>
+
+
+        
+      </div>
+
+      {/* Scroll Icon */}
+      
+    </section>
   );
-}
+};
