@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import BookReader from "@/components/book"
 
 
