@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import * as pdfjsLib from "pdfjs-dist";
-import "pdfjs-dist/webpack";
 import dynamic from "next/dynamic";
+import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
+
+// ⭐ REQUIRED FIX: Use worker from public folder
+GlobalWorkerOptions.workerSrc = "/pdfjs/pdf.worker.min.mjs";
 
 const Manage = dynamic(() => import("../components/manage"), { ssr: false });
 
@@ -16,40 +18,57 @@ type Props = {
 export default function BookReader({
   pdfUrl = "/book.pdf",
   initialPage = 0,
-  pageWidth = 1200,
+  pageWidth = 900, // ⭐ One-page horizontal layout
 }: Props) {
-  useEffect(() => {
-    // This code runs only in the browser
-    const matrix = new DOMMatrix();
-    console.log(matrix);
-  }, []);
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState<number>(initialPage);
   const [flipping, setFlipping] = useState(false);
   const flipRef = useRef<HTMLDivElement | null>(null);
+  const [isBrowser, setIsBrowser] = useState(false);
 
+  // Prevent SSR issues
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
+  // Load PDF pages as images
   useEffect(() => {
     let cancelled = false;
+
     async function loadPDF() {
       setLoading(true);
+
       try {
-        const loadingTask = pdfjsLib.getDocument(pdfUrl);
+        const loadingTask = getDocument(pdfUrl);
         const pdf = await loadingTask.promise;
+
         const imgs: string[] = [];
+
         for (let i = 1; i <= pdf.numPages; i++) {
           if (cancelled) break;
+
           const page = await pdf.getPage(i);
           const viewport = page.getViewport({ scale: 1 });
           const scale = pageWidth / viewport.width;
           const vp = page.getViewport({ scale });
+
           const canvas = document.createElement("canvas");
           canvas.width = Math.round(vp.width);
           canvas.height = Math.round(vp.height);
+
           const ctx = canvas.getContext("2d")!;
-          await page.render({ canvasContext: ctx, viewport: vp, canvas }).promise;
+
+          // ⭐ REQUIRED: include canvas in render call
+          await page.render({
+            canvasContext: ctx,
+            viewport: vp,
+            canvas: canvas,
+          }).promise;
+
           imgs.push(canvas.toDataURL("image/jpeg", 0.95));
         }
+
         if (!cancelled) {
           setImages(imgs);
           setCurrentIndex(Math.min(initialPage, imgs.length - 1));
@@ -60,12 +79,14 @@ export default function BookReader({
         if (!cancelled) setLoading(false);
       }
     }
+
     loadPDF();
     return () => {
       cancelled = true;
     };
   }, [pdfUrl, pageWidth, initialPage]);
 
+  // Page flip logic
   const flipNext = async () => {
     if (flipping || currentIndex + 1 >= images.length) return;
     setFlipping(true);
@@ -74,7 +95,7 @@ export default function BookReader({
       await new Promise((r) => setTimeout(r, 700));
       flipRef.current.classList.remove("flip-next");
     }
-    setCurrentIndex((i) => Math.min(i + 1, images.length - 1));
+    setCurrentIndex((i) => i + 1);
     setFlipping(false);
   };
 
@@ -86,26 +107,22 @@ export default function BookReader({
       await new Promise((r) => setTimeout(r, 700));
       flipRef.current.classList.remove("flip-prev");
     }
-    setCurrentIndex((i) => Math.max(i - 1, 0));
+    setCurrentIndex((i) => i - 1);
     setFlipping(false);
   };
 
-  const currentImg = images[currentIndex] ?? null;
-   const [isBrowser, setIsBrowser] = useState(false);
-
-  useEffect(() => {
-    setIsBrowser(true);
-  }, []);
-
   if (!isBrowser) return null;
+
+  const currentImg = images[currentIndex] ?? null;
 
   return (
     <div className="w-full min-h-[80vh] flex flex-col items-center justify-start py-12 bg-gradient-to-b from-[#fdf8f0] to-[#fff9f0] relative">
+
       <style jsx>{`
         .book-container {
           position: relative;
-          width: 95%;
-          max-width: 1400px;
+          width: 90%;
+          max-width: 1000px;
           min-height: 650px;
           background: linear-gradient(to bottom, #fff8e0, #f7f0d5);
           border-radius: 16px;
@@ -140,19 +157,18 @@ export default function BookReader({
           background: #fffdf2;
         }
 
-        .flip-overlay {
-          position: absolute;
-          inset: 0;
-          transform-style: preserve-3d;
-          backface-visibility: hidden;
-          pointer-events: none;
-        }
-
         .flip-next { animation: flipNext 0.7s forwards; }
         .flip-prev { animation: flipPrev 0.7s forwards; }
 
-        @keyframes flipNext { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(-180deg); } }
-        @keyframes flipPrev { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(180deg); } }
+        @keyframes flipNext {
+          0% { transform: rotateY(0deg); }
+          100% { transform: rotateY(-180deg); }
+        }
+
+        @keyframes flipPrev {
+          0% { transform: rotateY(0deg); }
+          100% { transform: rotateY(180deg); }
+        }
 
         .side-nav {
           position: absolute;
@@ -166,6 +182,7 @@ export default function BookReader({
           z-index: 20;
           transition: background 0.2s;
         }
+
         .side-nav:hover { background: rgba(0,0,0,0.08); }
 
         .left-nav { left: 0; border-radius: 0 8px 8px 0; }
@@ -196,10 +213,13 @@ export default function BookReader({
         ) : (
           <>
             <div className="page" ref={flipRef}>
-              {currentImg ? <img src={currentImg} alt={`Page ${currentIndex + 1}`} /> : <div>No page</div>}
+              {currentImg ? (
+                <img src={currentImg} alt={`Page ${currentIndex + 1}`} />
+              ) : (
+                <div>No page</div>
+              )}
             </div>
 
-            {/* Side navigation arrows */}
             <div className="side-nav left-nav" onClick={flipPrev}>
               <span className="nav-arrow">←</span>
             </div>
@@ -207,7 +227,9 @@ export default function BookReader({
               <span className="nav-arrow">→</span>
             </div>
 
-            <div className="page-number">{currentIndex + 1} / {images.length}</div>
+            <div className="page-number">
+              {currentIndex + 1} / {images.length}
+            </div>
           </>
         )}
       </div>

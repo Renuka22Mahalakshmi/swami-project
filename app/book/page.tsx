@@ -1,12 +1,15 @@
 "use client";
-import BookReader from "@/components/book"
 
-const Page = () => {
+import dynamic from "next/dynamic";
+
+const BookReader = dynamic(() => import("@/components/book"), {
+  ssr: false, // 🚀 stops server-side execution
+});
+
+export default function Page() {
   return (
     <div>
-        <BookReader/>
+      <BookReader />
     </div>
-  )
+  );
 }
-
-export default Page
