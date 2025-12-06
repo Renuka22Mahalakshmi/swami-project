@@ -16,7 +16,7 @@ const aboutDropdown = [
   { label: "Amma Samadhi", href: "/amma-samadhi" },
   { label: "Anugonda", href: "/anugonda" },
   { label: "Thata Sai Mandir", href: "/thata-sai-mandir" },
-  { label: "Jeevitha Charita", href: "/jeevitha-charita" },
+  { label: "Jeevitha Charita", href: "/book" },
   { label: "Leelamrutham", href: "/leelamrutham" },
   { label: "Goshala", href: "/goshala" },
   { label: "Daily Sevas", href: "/daily-sevas" },
@@ -36,6 +36,8 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [stickyAbout, setStickyAbout] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -77,30 +79,36 @@ export default function Navigation() {
               Home
             </Link>
 
-            {/* About Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setAboutOpen(true)}
-              onMouseLeave={() => setAboutOpen(false)}
-            >
-              <button className="flex items-center gap-1 text-sm text-gray-700 hover:text-orange-600">
-                About <ChevronDown className="w-4 h-4" />
-              </button>
+           {/* About Dropdown */}
+<div
+  className="relative"
+  onMouseEnter={() => !stickyAbout && setAboutOpen(true)}
+  onMouseLeave={() => !stickyAbout && setAboutOpen(false)}
+>
+  <button
+    onClick={() => setStickyAbout(!stickyAbout)}
+    className="flex items-center gap-1 text-sm text-gray-700 hover:text-orange-600"
+  >
+    About <ChevronDown className="w-4 h-4" />
+  </button>
 
-              {aboutOpen && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-white border rounded-xl shadow py-2 max-h-[70vh] overflow-y-auto">
-                  {aboutDropdown.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+  {(aboutOpen || stickyAbout) && (
+    <div className="absolute top-full left-0 mt-2 w-56 bg-white border rounded-xl shadow py-2 max-h-[70vh] overflow-y-auto">
+      {aboutDropdown.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-orange-600"
+          onClick={() => setStickyAbout(false)} // closes after clicking a link
+        >
+          {item.label}
+        </Link>
+      ))}
+    </div>
+  )}
+</div>
+
+
 
             {/* Other Links */}
             {navLinks.slice(1).map((link) => (
