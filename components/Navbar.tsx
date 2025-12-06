@@ -8,7 +8,7 @@ import logoImg from "../public/logo.png"; // update filename if different
 
 
 const aboutDropdown = [
-  { label: "About RamiReddy Thata", href: "/about" },
+  { label: "About RamiReddy Thata", href: "/thata" },
   { label: "Samadhi Mandir", href: "/samadhi-mandir" },
   { label: "Gurusthan", href: "/gurusthan" },
   { label: "Dhuni", href: "/dhuni" },
