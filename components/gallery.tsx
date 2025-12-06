@@ -4,49 +4,50 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+// You can adjust categories and add width/height info for each image
 const images = [
-  { src: "/1.jpg", category: "swami" },
-  { src: "/2.jpg", category: "swami" },
-  { src: "/3.jpg", category: "swami" },
-  { src: "/4.jpg", category: "goshala" },
-  { src: "/6.jpeg", category: "goshala" },
-  { src: "/7.jpg", category: "goshala" },
-  { src: "/8.jpg", category: "swami" },
-  { src: "/9.jpg", category: "swami" },
-  { src: "/10.jpg", category: "swami" },
-  { src: "/12.jpeg", category: "goshala" },
-  { src: "/13.jpg", category: "goshala" },
-  { src: "/14.jpg", category: "goshala" },
-  { src: "/15.jpeg", category: "swami" },
-  { src: "/16.jpg", category: "swami" },
-  { src: "/17.jpg", category: "swami" },
-  { src: "/19.jpg", category: "goshala" },
-  { src: "/20.jpeg", category: "goshala" },
-  { src: "/21.jpg", category: "goshala" },
-  { src: "/22.jpg", category: "swami" },
-  { src: "/24.jpg", category: "swami" },
-  { src: "/25.jpg", category: "swami" },
-  { src: "/26.jpg", category: "goshala" },
-  { src: "/27.jpg", category: "goshala" },
-  { src: "/28.png", category: "goshala" },
-  { src: "/29.jpeg", category: "swami" },
-  { src: "/30.jpeg", category: "swami" },
-  { src: "/31.jpeg", category: "swami" },
-  { src: "/32.jpeg", category: "swami" },
-  { src: "/33.jpeg", category: "swami" },
-  { src: "/34.jpeg", category: "swami" },
-  { src: "/35.jpeg", category: "swami" },
-  { src: "/36.jpeg", category: "swami" },
-  { src: "/37.jpeg", category: "swami" },
-  { src: "/38.jpeg", category: "swami" },
-  { src: "/39.jpeg", category: "swami" },
-  { src: "/40.jpeg", category: "swami" },
-  { src: "/41.jpeg", category: "swami" },
-  { src: "/42.jpeg", category: "swami" },
-  { src: "/43.jpeg", category: "swami" },
-  { src: "/44.jpeg", category: "swami" },
-  { src: "/45.jpeg", category: "swami" },
+  { src: "/1.jpg", category: "swami", orientation: "vertical" },
+  { src: "/2.jpg", category: "swami", orientation: "horizontal" },
+  { src: "/3.jpg", category: "swami", orientation: "vertical" },
+  { src: "/4.jpg", category: "goshala", orientation: "horizontal" },
+  { src: "/6.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/7.jpg", category: "goshala", orientation: "horizontal" },
+  { src: "/8.jpg", category: "swami", orientation: "horizontal" },
+  { src: "/9.jpg", category: "goshala", orientation: "horizontal" },
+  { src: "/10.jpg", category: "swami", orientation: "horizontal" },
+  { src: "/12.jpeg", category: "goshala", orientation: "horizontal" },
+  { src: "/13.jpg", category: "swami", orientation: "horizontal" },
+  { src: "/14.jpg", category: "swami", orientation: "vertical" },
+  { src: "/15.jpeg", category: "goshala", orientation: "horizontal" },
+  { src: "/16.jpg", category: "swami", orientation: "vertical" },
+  { src: "/17.jpg", category: "goshala", orientation: "vertical" },
+  { src: "/19.jpg", category: "swami", orientation: "horizontal" },
+  { src: "/21.jpg", category: "goshala", orientation: "vertical" },
+  { src: "/22.jpg", category: "goshala", orientation: "horizontal" },
+  { src: "/24.jpg", category: "goshala", orientation: "vertical" },
+  { src: "/25.jpg", category: "goshala", orientation: "horizontal" },
+  { src: "/26.jpg", category: "swami", orientation: "vertical" },
+  { src: "/27.jpg", category: "swami", orientation: "vertical" },
+  { src: "/29.jpeg", category: "swami", orientation: "vertical" },
+  { src: "/30.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/31.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/32.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/33.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/34.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/35.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/36.jpeg", category: "swami", orientation: "vertical" },
+  { src: "/37.jpeg", category: "goshala", orientation: "horizontal" },
+  { src: "/38.jpeg", category: "goshala", orientation: "horizontal" },
+  { src: "/39.jpeg", category: "goshala", orientation: "horizontal" },
+  { src: "/40.jpeg", category: "goshala", orientation: "horizontal" },
+  { src: "/41.jpeg", category: "goshala", orientation: "horizontal" },
+  { src: "/42.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/43.jpeg", category: "swami", orientation: "vertical" },
+  { src: "/44.jpeg", category: "swami", orientation: "horizontal" },
+  { src: "/45.jpeg", category: "swami", orientation: "horizontal" },
 ];
+
+
 
 export default function GalleryPage() {
   const [filter, setFilter] = useState("all");
@@ -57,8 +58,11 @@ export default function GalleryPage() {
       ? images
       : images.filter((img) => img.category === filter);
 
+  const horizontalImages = filteredImages.filter(img => img.orientation === "horizontal");
+  const verticalImages = filteredImages.filter(img => img.orientation === "vertical");
+
   return (
-    <div className="min-h-screen bg-white text-black py-12 px-6 md:px-12">
+    <div className="min-h-screen bg-white text-black pt-32 px-6 md:px-12">
 
       {/* Title */}
       <div className="text-center mb-10">
@@ -84,28 +88,61 @@ export default function GalleryPage() {
         ))}
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredImages.map((img, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="cursor-pointer rounded-xl overflow-hidden shadow"
-            onClick={() => setActiveImage(img.src)}
-          >
-            <Image
-              src={img.src}
-              alt=""
-              width={400}
-              height={300}
-              className="w-full h-auto object-cover"
-            />
-          </motion.div>
-        ))}
-      </div>
+      {/* Horizontal Images */}
+      {horizontalImages.length > 0 && (
+        <div className="mb-10">
+          <h2 className="text-2xl font-semibold mb-4">Horizontal Photos</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {horizontalImages.map((img, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                className="cursor-pointer rounded-xl overflow-hidden shadow"
+                onClick={() => setActiveImage(img.src)}
+              >
+                <Image
+                  src={img.src}
+                  alt=""
+                  width={400}
+                  height={300}
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Vertical Images */}
+      {verticalImages.length > 0 && (
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Vertical Photos</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {verticalImages.map((img, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                className="cursor-pointer rounded-xl overflow-hidden shadow"
+                onClick={() => setActiveImage(img.src)}
+              >
+                <Image
+                  src={img.src}
+                  alt=""
+                  width={300}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Lightbox */}
       {activeImage && (

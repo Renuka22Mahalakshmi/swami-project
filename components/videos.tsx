@@ -33,7 +33,8 @@ function extractId(url: string) {
 
 export default function Videos() {
   return (
-    <div className="min-h-screen bg-white text-black py-10 px-6 md:px-12">
+    <div className="min-h-screen bg-white text-black pt-32 px-6 md:px-12">
+
 
       {/* ⭐ Beautiful Title Section ⭐ */}
       <motion.div

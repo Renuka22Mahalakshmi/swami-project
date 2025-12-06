@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import heroBg from "../public/heaven.jpg";
+import heroBg from "../public/sky.png";
 
 export const HeroSection = () => {
   return (

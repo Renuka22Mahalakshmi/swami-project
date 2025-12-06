@@ -1,8 +1,11 @@
+import HolyBookReader from '@/components/leela'
 import React from 'react'
 
 const Leelamrutham = () => {
   return (
-    <div>Leelamrutham</div>
+    <div>
+        <HolyBookReader/>
+    </div>
   )
 }
 

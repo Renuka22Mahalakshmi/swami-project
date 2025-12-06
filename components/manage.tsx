@@ -54,20 +54,21 @@ export default function ManagementPage() {
     <div className="bg-gray-50 min-h-screen">
 
       {/* HERO */}
-      <motion.section
-        initial={{ opacity: 0, y: 25 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        className="text-center px-4 py-16 bg-gradient-to-b from-yellow-50 to-white"
-      >
-        <h1 className="text-4xl md:text-5xl font-serif font-bold mb-3">
-          Our Management Team
-        </h1>
-        <p className="text-lg text-orange-600 max-w-xl mx-auto">
-          Dedicated Servants of Sri Ramavadhuta&apos;s Mission
-        </p>
-        <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full mt-3 mx-auto" />
-      </motion.section>
+     <motion.section
+  initial={{ opacity: 0, y: 25 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.9, ease: "easeOut" }}
+  className="text-center px-4 pt-32 pb-16 bg-gradient-to-b from-yellow-50 to-white"
+>
+  <h1 className="text-4xl md:text-5xl font-serif font-bold mb-3">
+    Our Management Team
+  </h1>
+  <p className="text-lg text-orange-600 max-w-xl mx-auto">
+    Dedicated Servants of Sri Ramavadhuta&apos;s Mission
+  </p>
+  <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full mt-3 mx-auto" />
+</motion.section>
+
 
       {/* TEAM LIST SECTION */}
       <motion.section
