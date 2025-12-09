@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -22,7 +22,7 @@ export const AboutSection = () => {
     <section
       id="about"
       ref={sectionRef}
-className="section-padding py-28 md:py-32 bg-gradient-to-b from-background via-secondary/30 to-background"
+      className="section-padding py-28 md:py-32 bg-gradient-to-b from-background via-secondary/30 to-background"
     >
       <div className="container-sacred">
         {/* Header */}
@@ -40,32 +40,28 @@ className="section-padding py-28 md:py-32 bg-gradient-to-b from-background via-s
           <div className="w-20 h-1 bg-gradient-divine mx-auto rounded-full" />
         </div>
 
-        {/* 3-column layout: Left Image - Center Text - Right Image */}
+        {/* 3-column layout */}
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-20 items-center">
-          {/* Left Image */}
-<div
-  className={`relative transition-all duration-1000 delay-200 px-4 md:px-6 ${
-    isVisible
-      ? "opacity-100 -translate-x-0"
-      : "opacity-0 -translate-x-10"
-  }`}
->
-  <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-elevated">
-    <img
-      src="about.jpeg"
-      alt="Sri Ramavadhuta"
-      className="w-full h-full object-cover"
-    />
-  </div>
-</div>
 
+          {/* Left Image */}
+          <div
+            className={`relative transition-all duration-1000 delay-200 px-4 md:px-6 ${
+              isVisible ? "opacity-100 -translate-x-0" : "opacity-0 -translate-x-10"
+            }`}
+          >
+            <div className="w-full h-[480px] rounded-2xl overflow-hidden shadow-elevated bg-white flex items-center justify-center">
+              <img
+                src="about.jpeg"
+                alt="Sri Ramavadhuta"
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
 
           {/* Center Text */}
           <div
             className={`transition-all duration-1000 delay-300 text-center lg:text-left ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
             <div className="space-y-6">
@@ -73,21 +69,20 @@ className="section-padding py-28 md:py-32 bg-gradient-to-b from-background via-s
                 <span className="text-gradient-sacred font-semibold">
                   Sri Avadhutha Rami Reddy Thatha
                 </span>{" "}
-                
               </p>
 
               <p className="font-sans text-muted-foreground leading-relaxed">
                 Born on the auspicious day of Srikrishna Janmashtami at Anugonda
-                village of Kurnool District in Andhra Pradesh, born to Hanumanth Reddy and Eshwaramma in 1949 on Shravan
-                Bahula Ashtami.Just like Lord
-                Krishna showed miracles from childhood, Sri Ramavadhuta also
-                performed divine acts early in life.
+                village of Kurnool District in Andhra Pradesh, born to Hanumanth Reddy
+                and Eshwaramma in 1949 on Shravan Bahula Ashtami. Just like Lord
+                Krishna showed miracles from childhood, Sri Ramavadhuta also performed
+                divine acts early in life.
               </p>
 
               <p className="font-sans text-muted-foreground leading-relaxed">
                 At age 13, Tatha moved to Kallur Village near Kurnool. Devotees
-                regarded Sri Rami Reddy Thatha as the guiding head of their
-                families, and he took full responsibility for their well-being.
+                regarded Sri Rami Reddy Thatha as the guiding head of their families,
+                and he took full responsibility for their well-being.
               </p>
 
               <blockquote className="border-l-4 border-primary pl-6 py-4 bg-card rounded-r-lg shadow-soft">
@@ -102,9 +97,7 @@ className="section-padding py-28 md:py-32 bg-gradient-to-b from-background via-s
                 className="inline-flex items-center gap-2 font-sans font-medium text-primary hover:text-accent transition-colors group"
               >
                 Read Complete Biography{" "}
-                <span className="group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
             </div>
           </div>
@@ -112,19 +105,18 @@ className="section-padding py-28 md:py-32 bg-gradient-to-b from-background via-s
           {/* Right Image */}
           <div
             className={`relative transition-all duration-1000 delay-400 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-10"
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
             }`}
           >
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-elevated">
+            <div className="w-full h-[480px] rounded-2xl overflow-hidden shadow-elevated bg-white flex items-center justify-center">
               <img
-                src="baba.png"
+                src="baba.jpg"
                 alt="Sri Ramavadhuta"
                 className="w-full h-full object-contain"
               />
             </div>
           </div>
+
         </div>
       </div>
     </section>

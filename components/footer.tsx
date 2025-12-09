@@ -25,8 +25,9 @@ export const Footer = () => {
   return (
     <footer id="contact" className="bg-white text-gray-800 pt-20 pb-8 relative overflow-hidden">
       {/* Decorative Background Blur */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-fade-slow" />
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gray-200/10 rounded-full blur-3xl animate-fade-slow" />
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-fade-slow -z-10" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gray-200/10 rounded-full blur-3xl animate-fade-slow -z-10" />
+
 
       <div className="container-sacred px-6 md:px-12 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
@@ -125,7 +126,7 @@ export const Footer = () => {
         <div className="pt-8 border-t border-gray-300 animate-fade-up delay-500">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="font-sans text-sm text-gray-600">
-              © {new Date().getFullYear()} Avadhutha Sri Rami Reddy Thata Samsthan. All rights reserved.
+              © {new Date().getFullYear()} Avadhutha Sri Rami Reddy Thata Samasthan. All rights reserved.
             </p>
             <div className="flex items-center gap-2 text-gray-600 text-sm">
               <span>A Project By</span>

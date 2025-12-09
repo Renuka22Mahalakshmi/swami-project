@@ -19,7 +19,7 @@ export default function AmmaSamadhi() {
           className="w-full flex justify-center"
         >
           <Image
-            src="/25.jpg" // replace when actual image provided
+            src="/25.JPG" // replace when actual image provided
             alt="Amma Samadhi"
             width={450}
             height={450}

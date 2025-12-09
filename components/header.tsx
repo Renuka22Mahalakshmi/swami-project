@@ -40,7 +40,7 @@ export const HeroSection = () => {
     Rami Reddy Thata
   </span>
   <span className="block mt-4 text-3xl sm:text-4xl md:text-5xl font-normal text-white/90">
-    Samsthan
+    Samasthan
   </span>
 </h1>
 
@@ -57,3 +57,4 @@ export const HeroSection = () => {
     </section>
   );
 };
+

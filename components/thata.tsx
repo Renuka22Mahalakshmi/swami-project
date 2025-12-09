@@ -19,7 +19,7 @@ export default function AboutPage() {
           {/* LEFT — PHOTO */}
           <div className="flex justify-center">
             <Image
-              src="/14.jpg"     // <-- your png file
+              src="/about.jpeg"     // <-- your png file
               alt="Sri Avadhutha Rami Reddy Thatha"
               width={400}
               height={400}

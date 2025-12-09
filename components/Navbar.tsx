@@ -66,7 +66,7 @@ export default function Navigation() {
     <h1 className="font-serif text-lg md:text-xl font-semibold text-black leading-tight">
       Sri Rami Reddy Thata
     </h1>
-    <p className="text-xs text-gray-500 tracking-wider">SAMSTHAN</p>
+    <p className="text-xs text-gray-500 tracking-wider">SAMASTHAN</p>
   </div>
 </Link>
 
